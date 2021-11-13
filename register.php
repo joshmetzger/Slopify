@@ -45,16 +45,20 @@
             </p>
 
             <p>
+                <?php echo $account->getError("Your first name must be between 2 and 25 characters"); ?>
                 <label for="firstName">First name</label>
                 <input type="text" id="firstName" name="firstName" placeholder="enter first name" required>
             </p>
 
             <p>
+                <?php echo $account->getError("Your last name must be between 2 and 25 characters"); ?>
                 <label for="lastName">Last name</label>
                 <input type="text" id="lastName" name="lastName" placeholder="enter last name" required>
             </p>
 
             <p>
+                <?php echo $account->getError("Your emails do not match"); ?>
+                <?php echo $account->getError("email is invalid"); ?>
                 <label for="email">Email</label>
                 <input type="email" id="email" name="email" placeholder="enter email" required>
             </p>
@@ -66,6 +70,9 @@
 
 
             <p>
+                <?php echo $account->getError("Your passwords do not match"); ?>
+                <?php echo $account->getError("Your password can only contain letters and numbers"); ?>
+                <?php echo $account->getError("Your password must be between 5 and 30 characters"); ?>
                 <label for="pasword">Password</label>
                 <input type="password" id="password" name="password" placeholder="enter password" required>
             </p>
