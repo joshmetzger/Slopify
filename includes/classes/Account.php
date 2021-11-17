@@ -2,9 +2,11 @@
 
     class Account {
 
+        private $con;
         private $errorArray;
 
-        public function __construct() {
+        public function __construct($con) {
+            $this->con = $con;
             $this->errorArray = array();
         }
 
@@ -15,11 +17,12 @@
             $this->validateUEmails($em, $em2);
             $this->validatePasswords($pw, $pw2);
 
-            if(empty($this->errorArray)) {
+            if(empty($this->errorArray) == true) {
                 //insert into DB
-                return true;
+                return $this->insertUserDetails($un, $fn, $ln, $em, $pw);
             } else {
                 return false;
+                
             }
         }
 
@@ -28,6 +31,15 @@
                 $error = "";
             }
             return "<span class='errorMessage'>$error</span>";
+        }
+
+        private function insertUserDetails($un, $fn, $ln, $em, $pw) {
+            $encryptedPw = md5($pw);
+            $profilePic = "assets/images/profile-pics/IMG_E0051.JPG";
+            $date = date("Y-m-d");
+
+            $result = mysqli_query($this->con, "INSERT INTO users VALUES ('', '$un', '$fn', '$ln', '$em', '$encryptedPw', '$date', '$profilePic')");
+            return $result;
         }
 
         private function validateUsername($un) {
