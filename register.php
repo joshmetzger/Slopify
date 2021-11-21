@@ -23,19 +23,47 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="assets/css/register.css">
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="assets/js/register.js"></script>
     <title>Welcome to Slopify</title>
 </head>
 <body>
+
+    <?php
+
+        if(isset($_POST['registerButton'])) {
+            echo '<script>
+            $(document).ready(function() { 
+                $("#loginForm").hide();
+                $("#registerForm").show();
+            });
+            </script>';
+        } else {
+            echo '<script>
+            $(document).ready(function() {
+                $("#loginForm").show();
+                $("#registerForm").hide(); 
+            });
+            </script>';
+        }
+
+    ?>
+
+    
+
     <div id="background">
         <div id="loginContainer">
             <div id="inputContainer">
+
                 <form id="loginForm" action="register.php" method="POST">
 
                     <h2>Login to your account</h2>
                     <p>
                     <?php echo $account->getError(Constants::$loginFailed); ?>
                         <label for="loginUsername">Username</label>
-                        <input type="text" id="loginUsername" name="loginUsername" placeholder="enter username" required>
+                        <input type="text" id="loginUsername" name="loginUsername" placeholder="enter username" value="<?php getInputValue('loginUsername') ?>" required>
                     </p>
                     <p>
                         <label for="loginPassword">Password</label>
@@ -43,6 +71,10 @@
                     </p>
 
                     <button type="submit" name="loginButton">LOGIN</button>
+
+                    <div class="hasAccountText">
+                        <span id="hideLogin">Don't have an account yet? Sign up here.</span>
+                    </div>
 
                 </form>
 
@@ -97,10 +129,28 @@
                     </p>
 
                     <button type="submit" name="registerButton">SIGN UP</button>
+
+                    <div class="hasAccountText">
+                        <span id="hideRegister">Already have an account? Log in here.</span>
+                    </div>
                     
                 </form>
+
             </div>
+
+            <div id="loginText">
+                <h1>Get great music, right now</h1>
+                <h2>Listen to loads of songs for free</h2>
+
+                <ul>
+                    <li>Discover music you'll love</li>
+                    <li>Create your own playlists</li>
+                    <li>Follow artists to keep up to date</li>
+                </ul>
+            </div>
+
         </div>
     </div>
+
 </body>
 </html>
