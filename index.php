@@ -12,27 +12,24 @@
 
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="assets/css/style.css">
-    <title>Welcome to Slopify</title>
-</head>
-<body>
+<?php include("includes/header.php"); ?>
 
-    <div id="mainConatiner">
+<h1 class="pageHeadingBig">You Might Also Like</h1>
 
-        <div id="topContainer">
-            <?php include("includes/navBarContainer.php"); ?>
-        </div>
+<div class="gridViewContainer">
+    <?php 
+        $albumQuery = mysqli_query($con, "SELECT * FROM albums ORDER BY RAND() LIMIT 10");
 
-        <?php include("includes/nowPlayingBar.php"); ?>
-    </div>
-    
+        while($row = mysqli_fetch_array($albumQuery)) {
+            echo "<div class='gridViewItem'>
+                <img src='" . $row['artworkPath'] . "'>
+                <div class='gridViewInfo'>"
+                 . $row['title'] . 
+                "</div>
+            </div>";
+        }
+    ?>
+</div>
 
 
-</body>
-</html>
+<?php include("includes/footer.php"); ?>
