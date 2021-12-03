@@ -30,6 +30,18 @@ $josnArray = json_encode($resultArray);
        
     }
 
+    function playSong() {
+        $(".controlButton.play").hide();
+        $(".controlButton.pause").show();
+        audioElement.play();
+    }
+
+    function pauseSong() {
+        $(".controlButton.play").show();
+        $(".controlButton.pause").hide();
+        audioElement.pause();
+    }
+
 </script>
 
 <div id="nowPlayingBarContainer">
@@ -64,10 +76,10 @@ $josnArray = json_encode($resultArray);
                         <img src="assets/images/icons/previous.png" title="previous button" alt="previous">
                     </button>
                     <button class="controlButton play">
-                        <img src="assets/images/icons/play.png" title="play button" alt="play">
+                        <img src="assets/images/icons/play.png" title="play button" onclick="playSong()" alt="play">
                     </button>
-                    <button class="controlButton pause">
-                        <img src="assets/images/icons/pause.png" title="pause button" style="display: none;" alt="pause">
+                    <button class="controlButton pause" style="display: none;">
+                        <img src="assets/images/icons/pause.png" title="pause button" onclick="pauseSong()"alt="pause">
                     </button>
                     <button class="controlButton next">
                         <img src="assets/images/icons/next.png" title="next button" alt="next">
