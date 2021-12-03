@@ -23,18 +23,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" href="assets/css/style.css">
-    
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="assets/js/script.js"></script>
 
     <title>Welcome to Slopify</title>
 </head>
 <body>
-
-    <script>
-        var audioElement = new Audio();
-        audioElement.setTrack("assets/music/arrays.mp3");
-        audioElement.audio.play();
-    </script>
 
     <div id="mainConatiner">
 
