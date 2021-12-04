@@ -34,6 +34,13 @@ $josnArray = json_encode($resultArray);
 
                 $(".artistName span").text(artist.name);
             }); 
+
+            $.post("includes/handlers/ajax/getAlbumJson.php", { albumId: track.album }, function(data) {
+
+                var album = JSON.parse(data);
+
+                $(".albumLink img").attr("src", album.artworkPath);
+            });
             
             audioElement.setTrack(track.path);
             audioElement.play();
@@ -65,7 +72,7 @@ $josnArray = json_encode($resultArray);
         <div id="nowPlayingLeft">
             <div class="content">
                 <span class="albumLink">
-                    <img class="albumArtwork" src="assets/images/artwork/clearday.jpg" alt="">
+                    <img class="albumArtwork" src="" alt="">
                 </span>
 
                 <div class="trackInfo">
