@@ -18,6 +18,7 @@ $josnArray = json_encode($resultArray);
         currentPlaylist = <?php echo $josnArray; ?>;
         audioElement = new Audio();
         setTrack(currentPlaylist[0], currentPlaylist, false);
+        updateVolumeProgressBar(audioElement.audio);
 
         $(".playbackBar .progressBar").mousedown(function() {
             mouseDown = true;
@@ -34,9 +35,31 @@ $josnArray = json_encode($resultArray);
             timeFromOffset(e, this);
         });
 
+        $(".volumeBar .progressBar").mousedown(function() {
+            mouseDown = true;
+        });
+
+        $(".volumeBar .progressBar").mousemove(function(e) {
+            if(mouseDown) {
+                var percentage = e.offsetX / $(this).width();
+
+                if(percentage >= 0 && percentage <= 1) {
+                    audioElement.audio.volume = percentage;
+                }
+            }
+        });
+
+        $(".volumeBar .progressBar").mouseup(function(e) {
+            var percentage = e.offsetX / $(this).width();
+
+                if(percentage >= 0 && percentage <= 1) {
+                    audioElement.audio.volume = percentage;
+                }
+        });
+
         $(document).mouseup(function() {
             mouseDown = false;
-        })
+        });
 
     });
 
@@ -160,8 +183,8 @@ $josnArray = json_encode($resultArray);
 
         <div id="nowPlayingRight">
             <div class="volumeBar">
-                <button class="controlButton volume" title="volume button">
-                    <img src="assets/images/icons/volume.png" alt="volume">
+                <button class="controlButton volume" title="Volume button">
+                    <img src="assets/images/icons/volume.png" alt="Volume">
                 </button>
 
                 <div class="progressBar">
